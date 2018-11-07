@@ -15,4 +15,12 @@
     <string name="passwordConfirm">Password Confirmation</string>
     <string name="securityQ1">What is the name of your school?</string>
     <string name="securityQ2">What is the name of your city?</string>
+
+    <!--Menu Button-->
+    <string name="home">Home</string>
+    <string name="report">Report</string>
+    <string name="logout">Log Out</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

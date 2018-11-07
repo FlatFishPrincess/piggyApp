@@ -6,15 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
-    <ImageView
-        android:id="@+id/piggyImg"
-        android:layout_width="66dp"
-        android:layout_height="65dp"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="32dp"
-        android:transitionName="welcome_transition"
-        android:src="@drawable/piggy" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        app:itemBackground="@color/orange"
+        app:itemIconTint="@color/textWhite"
+        app:itemTextColor="@color/textWhite"
+        app:menu="@menu/nav_items">
+
+    </android.support.design.widget.BottomNavigationView>
+
+    <FrameLayout
+        android:id="@+id/dashboard_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/piggyImg"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-45dp">
+
+    </FrameLayout>
+
 
 </RelativeLayout>
