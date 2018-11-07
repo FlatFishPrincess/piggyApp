@@ -1,0 +1,249 @@
+{
+  "project_info": {
+    "project_number": "389656231284",
+    "firebase_url": "https://financialapp-4e66e.firebaseio.com",
+    "project_id": "financialapp-4e66e",
+    "storage_bucket": "financialapp-4e66e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:fbfe02619cddf675",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.jiweon.login_registeration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:a455961c032d5b2a",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.jiweon.registerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-j0utqfeg9k9l1ooe86qbpjonj12p2k9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.douglascollege.jiweon.registerapp",
+            "certificate_hash": "698b1b442b8a510cf0a8052e9ae952e613255c53"
+          }
+        },
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:003133ecdbcf09d3",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.jiweon.registration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-40q2i9idksk40l2dsnsh0us5jhcl7sdt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.douglascollege.jiweon.registration",
+            "certificate_hash": "698b1b442b8a510cf0a8052e9ae952e613255c53"
+          }
+        },
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:b2513e5ae8af9447",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.jiweon.registrationandsignin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-i4r070sj6uf7b4oqkep8n22l0qkig6h0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.douglascollege.jiweon.registrationandsignin",
+            "certificate_hash": "698b1b442b8a510cf0a8052e9ae952e613255c53"
+          }
+        },
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:73ad6a704664304b",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.jiweon.testwithray"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-7oklllnla59rkh5jgd2jplaemueatkr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.douglascollege.jiweon.testwithray",
+            "certificate_hash": "698b1b442b8a510cf0a8052e9ae952e613255c53"
+          }
+        },
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389656231284:android:c9fc654e926fedad",
+        "android_client_info": {
+          "package_name": "ca.douglascollege.mobileproject.piggy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389656231284-7i54sfebkn04m0u8enqa0l65e9pf2gtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfA0pTnrpgVTHcKg_smo3xJP6yh91-rJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<resources>
+    <!--Welcome Page-->
+    <string name="app_name">Piggy</string>
+    <string name="welcomeTitle">Welcome To Piggy</string>
+    <string name="emailHint">User@email.com</string>
+    <string name="passwordHint">Password</string>
+    <string name="btnSign">Sign In</string>
+    <string name="btnRegister">Register</string>
+
+    <!--Register Page-->
+    <string name="registerTitle">Create an Account</string>
+    <string name="fullName">Full Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="passwordConfirm">Password Confirmation</string>
+    <string name="securityQ1">What is the name of your school?</string>
+    <string name="securityQ2">What is the name of your city?</string>
+</resources>

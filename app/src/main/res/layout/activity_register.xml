@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="109dp"
+        android:text="@string/fullName" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="248dp"
+        android:layout_height="41dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="135dp"
+        android:background="@drawable/edit_text_custom"
+        android:ems="10"
+        android:hint="@string/fullName"
+
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="212dp"
+        android:background="@drawable/edit_text_custom"
+        android:ems="10"
+        android:hint="@string/emailHint"
+
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="289dp"
+        android:background="@drawable/edit_text_custom"
+        android:ems="10"
+        android:hint="@string/passwordHint"
+
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txtPasswordConfirm"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/edit_text_custom"
+        android:ems="10"
+        android:hint="@string/passwordConfirm"
+
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="190dp"
+        android:text="@string/email" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="269dp"
+        android:text="@string/password" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="352dp"
+        android:text="@string/passwordConfirm" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="275dp"
+        android:layout_height="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-45dp"
+        android:layout_marginBottom="54dp"
+        android:layout_toEndOf="@+id/textview2"
+        android:background="@drawable/button_custom"
+        android:text="@string/btnRegister"
+        android:textColor="@color/textWhite" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/registerTitle"
+        android:textAlignment="center"
+        android:textColor="@color/textBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnRegister"
+        android:layout_alignBottom="@+id/title"
+        android:layout_marginStart="-24dp"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:visibility="invisible" />
+
+</RelativeLayout>
