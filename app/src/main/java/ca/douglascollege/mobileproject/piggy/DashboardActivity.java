@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class DashboardActivity extends AppCompatActivity {
         Fade fade = new Fade();
         getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(fade);
+
+        final ImageView piggyIcon = findViewById(R.id.piggyImg);
 
         frameLayout = findViewById(R.id.dashboard_frame);
         bottomNav = findViewById(R.id.bottom_nav);

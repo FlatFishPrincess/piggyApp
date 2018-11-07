@@ -21,11 +21,17 @@
 
     </android.support.design.widget.BottomNavigationView>
 
+    <ImageView
+        android:id="@+id/piggyImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="welcome_transition"
+        app:srcCompat="@drawable/piggy" />
+
     <FrameLayout
         android:id="@+id/dashboard_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/piggyImg"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="-45dp">
 
