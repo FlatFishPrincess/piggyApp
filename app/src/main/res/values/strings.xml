@@ -1,5 +1,17 @@
 <resources>
-    <!--Welcome Page-->
+
+    <!--Shared button or words-->
+        <!--shared words-->
+        <string name="income">Income</string>
+        <string name="expense">Expense</string>
+
+        <!--shared button -->
+        <string name="btnCancle">Cancel</string>
+        <string name="btnSave">Save</string>
+        <string name="btnOK">OK</string>
+
+
+    <!--Welcome Activity-->
     <string name="app_name">Piggy</string>
     <string name="welcomeTitle">Welcome To Piggy</string>
     <string name="emailHint">User@email.com</string>
@@ -7,7 +19,7 @@
     <string name="btnSign">Sign In</string>
     <string name="btnRegister">Register</string>
 
-    <!--Register Page-->
+    <!--Register Activity-->
     <string name="registerTitle">Create an Account</string>
     <string name="fullName">Full Name</string>
     <string name="email">Email</string>
@@ -16,10 +28,28 @@
     <string name="securityQ1">What is the name of your school?</string>
     <string name="securityQ2">What is the name of your city?</string>
 
-    <!--Menu Button-->
-    <string name="home">Home</string>
-    <string name="report">Report</string>
-    <string name="logout">Log Out</string>
+    <!--Dashboard Fragment -->
+    <string name="incomeTxt">Please Enter Your Income</string>
+    <string name="expenseTxt">Expense Txt </string>
+    <string name="savingsTxt">See upcoming events and their savings</string>
+    <string name="reportTxt">See your monthly report with statistics and charts</string>
+
+        <!--Bottom Navigation Button in Dashboard fragment-->
+        <string name="home">Home</string>
+        <string name="report">Report</string>
+        <string name="logout">Log Out</string>
+
+
+    <!--Income Activity -->
+    <string name="incomeTitle">Income</string>
+    <string name="enterIncome">Enter Your Income</string>
+
+
+
+    <!--Expense Activity -->
+    <string name="expenseTitle">Expense Calendar</string>
+    <string name="dailyAllowance">Daily Allowance</string>
+    <string name="total">Total</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
