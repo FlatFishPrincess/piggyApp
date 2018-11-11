@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
+
+    <ImageView
+        android:id="@+id/piggyImg"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:transitionName="welcome_transition"
+        app:srcCompat="@drawable/piggy" />
+
+    <!--DashBoard fragment-->
+    <FrameLayout
+        android:id="@+id/dashboard_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-45dp">
+    </FrameLayout>
+
+    <!--Botton navigation-->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
@@ -20,22 +38,5 @@
         app:menu="@menu/nav_items">
 
     </android.support.design.widget.BottomNavigationView>
-
-    <ImageView
-        android:id="@+id/piggyImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:transitionName="welcome_transition"
-        app:srcCompat="@drawable/piggy" />
-
-    <FrameLayout
-        android:id="@+id/dashboard_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="-45dp">
-
-    </FrameLayout>
-
 
 </RelativeLayout>

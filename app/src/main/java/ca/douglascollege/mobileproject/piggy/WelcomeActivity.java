@@ -26,7 +26,9 @@ public class WelcomeActivity extends AppCompatActivity {
     private EditText passwordText;
     private Button signInBtn;
     private Button registerBtn;
-//    private ImageView piggyIcon;
+    private ImageView piggyIcon;
+
+    // Firebase is for sign up and registration for authentication
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -35,6 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        // Sign Button clicked, login user method
         signInBtn = findViewById(R.id.btnSignIn);
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +46,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        // Register button clicked, go to RegisterActivitiy
         registerBtn = findViewById(R.id.btnRegister);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,29 +55,36 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        // fade effect fot enter and exit
+        // fade transition effect fot enter and exit
         Fade fade = new Fade();
         getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(fade);
     }
 
+    // Check login user
     private void loginUser() {
 
         emailText = findViewById(R.id.emailTxt);
         passwordText = findViewById(R.id.passwordTxt);
-        final ImageView piggyIcon = findViewById(R.id.piggyImg);
+        piggyIcon = findViewById(R.id.piggyImg);
 
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
-        Log.d("sign", email + ", " + password);
+
+//        Log.d("sign", email + ", " + password);
+
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // Sign in success, update UI with the signed-in user's information
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("success_signIn", "signInWithEmail:success");
+//                            Log.d("success_signIn", "signInWithEmail:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                            // Start Dashboard Activitiy with animation.
+                            // Piggy Icon is a shared transition item.
                             Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
                             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                                     WelcomeActivity.this, piggyIcon, ViewCompat.getTransitionName(piggyIcon)
@@ -82,13 +93,11 @@ public class WelcomeActivity extends AppCompatActivity {
 //                            startActivity(new Intent(WelcomeActivity.this, DashboardActivity.class));
 //                            Toast.makeText(WelcomeActivity.this, "Sign In successfully.",
 //                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a fail message to the user.
                             Log.w("failure_signIn", "signInWithEmail:failure", task.getException());
                             Toast.makeText(WelcomeActivity.this, "Please try again or Register.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
                         }
 
                     }

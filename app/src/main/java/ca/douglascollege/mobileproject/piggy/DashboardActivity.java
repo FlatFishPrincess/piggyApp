@@ -24,7 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // fade effect fot enter and exit
+        // fade transition effect fot enter and exit
         Fade fade = new Fade();
         getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(fade);
@@ -38,27 +38,22 @@ public class DashboardActivity extends AppCompatActivity {
         logoutFragment = new LogoutFragment();
         reportFragment = new ReportFragment();
 
-        //setting default fragment layout
+        //setting default fragment layout, which is Dashboard
         setFrame(dashboardFragment);
-
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                return false;
                 switch (menuItem.getItemId()){
                     case R.id.home: {
-//                        bottomNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFrame(dashboardFragment);
                         return true;
                     }
                     case R.id.report: {
-//                        bottomNav.setItemBackgroundResource(R.color.colorAccent);
                         setFrame(reportFragment);
                         return true;
                     }
                     case R.id.logout: {
-//                        bottomNav.setItemBackgroundResource(R.color.colorPrimaryDark);
                         setFrame(logoutFragment);
                         return true;
                     }
@@ -67,7 +62,6 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void setFrame(Fragment fragment) {
