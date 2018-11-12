@@ -5,13 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SavingsActivity">
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:scrollbars="vertical"
+        android:layout_marginBottom="150dp">
+    </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/textView7"
+    <EditText
+        android:id="@+id/txtEvent"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/btnAdd"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="45dp"
+        android:hint="Event Name" />
+
+    <EditText
+        android:id="@+id/txtSavingAmt"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/btnAdd"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="-11dp"
+        android:hint="Saving Amt"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="146dp"
-        android:text="savings" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="275dp"
+        android:layout_marginBottom="31dp"
+        android:text="Add Event" />
+
+
 </RelativeLayout>

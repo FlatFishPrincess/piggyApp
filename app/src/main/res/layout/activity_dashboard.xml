@@ -9,8 +9,10 @@
 
     <ImageView
         android:id="@+id/piggyImg"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="150dp"
         android:transitionName="welcome_transition"
         app:srcCompat="@drawable/piggy" />
 
@@ -20,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="-45dp">
-    </FrameLayout>
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-45dp"></FrameLayout>
 
     <!--Botton navigation-->
     <android.support.design.widget.BottomNavigationView
