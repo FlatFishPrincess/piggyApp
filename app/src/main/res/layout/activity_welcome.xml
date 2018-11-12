@@ -12,10 +12,10 @@
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="32dp"
-        android:transitionName="welcome_transition"
-        android:src="@drawable/piggy" />
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/piggy"
+        android:transitionName="welcome_transition" />
 
     <TextView
         android:id="@+id/textView2"
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/piggyImg"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="-102dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="-95dp"
         android:shadowColor="@color/textBlack"
         android:text="@string/welcomeTitle"
         android:textColor="@color/orange"
@@ -37,8 +37,8 @@
         android:layout_height="40dp"
         android:layout_alignEnd="@+id/textView2"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="237dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginTop="299dp"
+        android:layout_marginEnd="3dp"
         android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/emailHint"
@@ -52,10 +52,9 @@
         android:layout_height="40dp"
         android:layout_alignStart="@+id/emailTxt"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="230dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="260dp"
         android:background="@drawable/edit_text_custom"
-        android:ems="10"
         android:hint="@string/passwordHint"
         android:inputType="textPassword"
         android:textAlignment="center" />
@@ -64,9 +63,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="181dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginBottom="403dp"
         app:srcCompat="@drawable/divider" />
 
 
@@ -74,9 +74,10 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="385dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="195dp"
         app:srcCompat="@drawable/divider" />
 
     <Button
@@ -98,8 +99,8 @@
         android:layout_height="31dp"
         android:layout_alignStart="@+id/textView2"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-20dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginBottom="71dp"
         android:background="@drawable/edit_text_custom"
         android:text="@string/btnRegister"
         android:textColor="@color/orange" />

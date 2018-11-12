@@ -1,5 +1,6 @@
 package ca.douglascollege.mobileproject.piggy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView signInTextView;
     private ProgressBar progressBar;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private ImageView piggyIcon;
 
 
     @Override
@@ -34,13 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         registerBtn = findViewById(R.id.btnRegister);
-        emailText = findViewById(R.id.emailTxt);
-        passwordText = findViewById(R.id.passwordTxt);
+        emailText = findViewById(R.id.txtEmail);
+        passwordText = findViewById(R.id.txtPassword);
         passwordConfirmText = findViewById(R.id.txtPasswordConfirm);
+        piggyIcon = findViewById(R.id.piggyImg);
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("clicked", "clicked");
+//                Log.d("clicked", "clicked"+ passwordText + emailText);
                 registerUser(emailText, passwordText, passwordConfirmText);
             }
         });
@@ -48,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser(EditText emailText, EditText passwordText, EditText passwordConfirmText) {
 
+        piggyIcon.setVisibility(View.INVISIBLE);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -60,44 +66,51 @@ public class RegisterActivity extends AppCompatActivity {
 
         //if empty,  return to finish the registerUser method
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            piggyIcon.setVisibility(View.VISIBLE);
             return;
         }
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            piggyIcon.setVisibility(View.VISIBLE);
             //stopping the function execution further
             return;
         }
         if(TextUtils.isEmpty(passwordConfirm)){
-            Toast.makeText(this, "Please enter password confirmation", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter password confirmation", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            piggyIcon.setVisibility(View.VISIBLE);
             //stopping the function execution further
             return;
         }
 
-        if(password == passwordConfirm){
+        if(password.equals(passwordConfirm)){
             //create user with firebase auth
             firebaseAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                //user successfully registered
-                                Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
-                                AuthResult result = task.getResult();
-                                progressBar.setVisibility(View.INVISIBLE);
-                            } else{
-                                Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_SHORT).show();
-                                Exception exception = task.getException();
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
+                        if(task.isSuccessful()){
+                            //user successfully registered
+                            Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
+                            AuthResult result = task.getResult();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
+                        } else{
+                            Toast.makeText(getApplicationContext(), "Please try again, password should have characters and numbers", Toast.LENGTH_LONG).show();
+                            Exception exception = task.getException();
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
                         }
                     });
         } else {
-            Toast.makeText(this, "Password does not match with confirmation", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Password does not match with confirmation", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            piggyIcon.setVisibility(View.VISIBLE);
             //stopping the function execution further
             return;
         }
-
-
     }
 }

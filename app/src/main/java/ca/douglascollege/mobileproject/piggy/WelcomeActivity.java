@@ -37,6 +37,8 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        piggyIcon = findViewById(R.id.piggyImg);
+
         // Sign Button clicked, login user method
         signInBtn = findViewById(R.id.btnSignIn);
         signInBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +54,11 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WelcomeActivity.this, RegisterActivity.class));
+                Intent registerIntent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        WelcomeActivity.this, piggyIcon, ViewCompat.getTransitionName(piggyIcon)
+                );
+                startActivity(registerIntent, options.toBundle());
             }
         });
 
@@ -66,18 +73,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
         emailText = findViewById(R.id.emailTxt);
         passwordText = findViewById(R.id.passwordTxt);
-        piggyIcon = findViewById(R.id.piggyImg);
 
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
 
-//        Log.d("sign", email + ", " + password);
+        Log.d("sign", email + ", " + password);
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         // Sign in success, update UI with the signed-in user's information
                         if (task.isSuccessful()) {
 //                            Log.d("success_signIn", "signInWithEmail:success");

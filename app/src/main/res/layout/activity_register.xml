@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="109dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="132dp"
         android:text="@string/fullName" />
 
     <EditText
@@ -22,8 +22,8 @@
         android:layout_height="41dp"
         android:layout_alignStart="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginStart="-9dp"
+        android:layout_marginTop="163dp"
         android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/fullName"
@@ -35,14 +35,13 @@
         android:id="@+id/txtEmail"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignStart="@+id/userName"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="244dp"
         android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/emailHint"
-
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
@@ -50,14 +49,14 @@
         android:id="@+id/txtPassword"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignEnd="@+id/userName"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="289dp"
+        android:layout_marginTop="328dp"
+        android:layout_marginEnd="-2dp"
         android:background="@drawable/edit_text_custom"
+
         android:ems="10"
         android:hint="@string/passwordHint"
-
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
@@ -65,14 +64,13 @@
         android:id="@+id/txtPasswordConfirm"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignStart="@+id/userName"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="414dp"
         android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/passwordConfirm"
-
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
@@ -83,7 +81,7 @@
         android:layout_alignStart="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="217dp"
         android:text="@string/email" />
 
     <TextView
@@ -93,7 +91,7 @@
         android:layout_alignStart="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="269dp"
+        android:layout_marginTop="302dp"
         android:text="@string/password" />
 
     <TextView
@@ -102,8 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginStart="-7dp"
+        android:layout_marginTop="385dp"
         android:text="@string/passwordConfirm" />
 
     <Button
@@ -111,8 +109,8 @@
         android:layout_width="275dp"
         android:layout_height="31dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-45dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginStart="-54dp"
+        android:layout_marginBottom="74dp"
         android:layout_toEndOf="@+id/textview2"
         android:background="@drawable/button_custom"
         android:text="@string/btnRegister"
@@ -122,9 +120,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="34dp"
         android:text="@string/registerTitle"
         android:textAlignment="center"
         android:textColor="@color/textBlack"
@@ -132,14 +131,26 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnRegister"
-        android:layout_alignBottom="@+id/title"
-        android:layout_marginStart="-24dp"
-        android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        android:id="@+id/piggyImg"
+        android:layout_width="66dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="468dp"
+        android:src="@drawable/piggy"
+        android:transitionName="welcome_transition" />
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/btnRegister"-->
+        <!--android:layout_alignBottom="@+id/title"-->
+        <!--android:layout_marginStart="-7dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--app:srcCompat="@drawable/ic_arrow_back_black_24dp" />-->
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -147,8 +158,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnRegister"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="30dp"
         android:visibility="invisible" />
 
 </RelativeLayout>

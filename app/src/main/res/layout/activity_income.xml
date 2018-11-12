@@ -11,21 +11,23 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="153dp"
         android:elevation="20dp"
         android:src="@drawable/currency_icon" />
 
     <TextView
-        android:id="@+id/txtResult"
+        android:id="@+id/txtResult2"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="169dp"
         android:background="@drawable/box_custom"
         android:elevation="5dp"
-        android:gravity="center_vertical|center"
-        android:text="Current Total Income" />
+        android:gravity="bottom|center"
+        android:paddingBottom="30dp"
+        android:text="Current Total Income"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnIncome"
@@ -33,9 +35,21 @@
         android:layout_height="31dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="180dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="210dp"
         android:background="@drawable/button_custom"
         android:text="@string/enterIncome"
         android:textColor="@color/textWhite" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="213dp"
+        android:text="TextView"
+        android:textColor="@color/textBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </RelativeLayout>
