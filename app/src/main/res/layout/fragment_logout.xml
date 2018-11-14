@@ -5,10 +5,72 @@
     android:layout_height="match_parent"
     tools:context=".LogoutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/confirmSignOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Are you sure you want to sign out?"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnSignOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/confirmSignOut"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_custom"
+                android:text="Sign Out"
+                android:textColor="@color/textWhite" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="459dp"
+            android:layout_height="362dp"
+            android:layout_marginTop="150dp">
+
+            <ProgressBar
+                android:id="@+id/progressBarSignout"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="63dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/orange"
+                android:indeterminateTintMode="src_atop"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/progressBarSignout"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="147dp"
+                android:layout_marginBottom="38dp"
+                android:text="Sign out..."
+                android:textSize="20dp"
+                android:visibility="invisible"
+                android:id="@+id/txtSignOut"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 
 </FrameLayout>
