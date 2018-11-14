@@ -52,8 +52,8 @@ public class LogoutFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 // Add the buttons
                 builder.setTitle("Log out");
-                builder.setMessage("Are you sure to log out?")
-                        .setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() {
+                builder.setMessage("You have logged out successfully")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
                         Log.d("clicekd","Clicekd");
@@ -64,12 +64,6 @@ public class LogoutFragment extends Fragment {
                         startActivity(new Intent(getActivity(), WelcomeActivity.class));
                     }
                 });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                       dialog.cancel();
-                    }
-                });
-
                 builder.show();
 
             }
