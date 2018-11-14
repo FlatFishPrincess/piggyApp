@@ -44,7 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="275dp"
         android:layout_marginBottom="31dp"
-        android:text="Add Event" />
-
-
+        android:text="Add Event"
+        android:textColor="@color/textWhite"
+        android:background="@drawable/button_custom"/>
 </RelativeLayout>

@@ -22,6 +22,8 @@ public class SavingsActivity extends AppCompatActivity {
     private EditText eventTxt;
     private EditText savingAmtTxt;
 
+    // TODO: customizing alert dialog layout, handle user account
+
     private ArrayList<SavingRecyclerView> savingsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

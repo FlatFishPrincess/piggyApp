@@ -22,6 +22,8 @@ public class DashboardFragment extends Fragment {
     }
 
 
+    // TODO: when user click, transition with animation
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -25,12 +25,17 @@ public class ReportActivity extends AppCompatActivity {
     private PieChart pieChart;
     private BarChart barChart;
 
+    // TODO: color theme, connect database and put values into graph chart array
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
+        // get piechart
         getPieChart();
+
+        // get bar chart
         getBarChart();
 
     }
@@ -44,6 +49,7 @@ public class ReportActivity extends AppCompatActivity {
         pieChart.setHighlightPerTapEnabled(true);
 
         //pie entry values
+        // put values into entires array
         List<PieEntry> entries = new ArrayList<>();
 
         entries.add(new PieEntry(18.5f, "Grocery"));
