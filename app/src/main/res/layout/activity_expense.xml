@@ -28,13 +28,12 @@
         android:text="allowance result" />
 
     <CalendarView
-        android:id="@+id/calendar"
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="383dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="0dp"
-        />
+        android:layout_marginEnd="0dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -121,5 +120,17 @@
         android:src="@drawable/assessment"
         android:tint="@color/textWhite"
         app:backgroundTint="@color/orange" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/returnFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignTop="@+id/fab"
+        android:layout_marginStart="-63dp"
+        android:layout_marginTop="3dp"
+        android:clickable="true"
+        app:backgroundTint="@color/orange"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
 </RelativeLayout>

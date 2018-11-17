@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -58,9 +60,9 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         //get email and password from input and trim them
-        String email = emailText.getText().toString().trim();
-        String password = passwordText.getText().toString().trim();
-        String passwordConfirm = passwordConfirmText.getText().toString().trim();
+        final String email = emailText.getText().toString().trim();
+        final String password = passwordText.getText().toString().trim();
+        final String passwordConfirm = passwordConfirmText.getText().toString().trim();
         Log.d("register user!!!!!", email + ",   " + password);
 
 
@@ -92,17 +94,20 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            //user successfully registered
-                            Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
-                            AuthResult result = task.getResult();
-                            progressBar.setVisibility(View.INVISIBLE);
-                            startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
-                        } else{
-                            Toast.makeText(getApplicationContext(), "Please try again, password should have characters and numbers", Toast.LENGTH_LONG).show();
-                            Exception exception = task.getException();
-                            progressBar.setVisibility(View.INVISIBLE);
-                        }
+                            if(task.isSuccessful()){
+                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+                                DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
+                                currentUserDB.child("email").setValue(email);
+                                //user successfully registered
+                                Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
+                                AuthResult result = task.getResult();
+                                progressBar.setVisibility(View.INVISIBLE);
+                                startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
+                            } else{
+                                Toast.makeText(getApplicationContext(), "Please try again, password should have characters and numbers", Toast.LENGTH_LONG).show();
+                                Exception exception = task.getException();
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
                         }
                     });
         } else {

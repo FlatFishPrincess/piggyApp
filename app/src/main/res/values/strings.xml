@@ -1,14 +1,14 @@
 <resources>
 
     <!--Shared button or words-->
-        <!--shared words-->
-        <string name="income">Income</string>
-        <string name="expense">Expense</string>
+    <!--shared words-->
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
 
-        <!--shared button -->
-        <string name="btnCancle">Cancel</string>
-        <string name="btnSave">Save</string>
-        <string name="btnOK">OK</string>
+    <!--shared button -->
+    <string name="btnCancle">Cancel</string>
+    <string name="btnSave">Save</string>
+    <string name="btnOK">OK</string>
 
 
     <!--Welcome Activity-->
@@ -34,16 +34,15 @@
     <string name="savingsTxt">See upcoming events and their savings</string>
     <string name="reportTxt">See your monthly report with statistics and charts</string>
 
-        <!--Bottom Navigation Button in Dashboard fragment-->
-        <string name="home">Home</string>
-        <string name="report">Report</string>
-        <string name="logout">Log Out</string>
+    <!--Bottom Navigation Button in Dashboard fragment-->
+    <string name="home">Home</string>
+    <string name="report">Report</string>
+    <string name="logout">Log Out</string>
 
 
     <!--Income Activity -->
     <string name="incomeTitle">Income</string>
     <string name="enterIncome">Enter Your Income</string>
-
 
 
     <!--Expense Activity -->
@@ -53,4 +52,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Amount">Amount</string>
+    <string name="titleExpense">Name of the Expense</string>
+    <string name="hintCategory">Choose the category</string>
+
+    <!-- Array for the Spinner -->
+    <string-array name="txtGroup">
+        <item>Select the Category</item>
+        <item>Clothes</item>
+        <item>Transportation</item>
+        <item>Food</item>
+        <item>Entertainment</item>
+        <item>Other</item>
+    </string-array>
+    <string name="amountTxt">Enter amount</string>
+
 </resources>

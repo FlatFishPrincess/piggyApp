@@ -39,6 +39,7 @@
         <activity
             android:name=".ReportActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".DayExpenseActivity"></activity>
     </application>
 
 </manifest>
