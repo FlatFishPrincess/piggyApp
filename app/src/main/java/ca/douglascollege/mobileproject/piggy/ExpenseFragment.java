@@ -99,6 +99,8 @@ public class ExpenseFragment extends Fragment {
 
     public void openDialog(){
         ExpenseDialog expenseDialog = new ExpenseDialog();
+        expenseDialog.show(getFragmentManager(), "DIOLOG");
+
     }
 
 }
