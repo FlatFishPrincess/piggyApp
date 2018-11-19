@@ -4,6 +4,8 @@ package ca.douglascollege.mobileproject.piggy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,12 @@ public class DashboardFragment extends Fragment {
         expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ExpenseActivity.class));
+//                startActivity(new Intent(getActivity(), ExpenseActivity.class));
+                ExpenseFragment exepenseFragment = new ExpenseFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.dashboard_frame, exepenseFragment);
+                fragmentTransaction.commit();
             }
         });
 

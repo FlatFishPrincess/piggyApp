@@ -1,11 +1,12 @@
 package ca.douglascollege.mobileproject.piggy;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
@@ -19,8 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ExpenseFragment extends Fragment {
 
-public class ExpenseActivity extends AppCompatActivity {
+    View view;
     double expense;
     double total;
     double incomeTotal;
@@ -30,43 +35,36 @@ public class ExpenseActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
     final DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
-    FloatingActionButton returnFBtn;
-    FloatingActionButton reportFBtn;
+    FloatingActionButton returnBTn;
 
-    //TODO expense pop up dialog
+
+
+    public ExpenseFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expense);
-
-        // Floating button clicked, go to report or dashboard activity
-        reportFBtn = findViewById(R.id.fab);
-        returnFBtn = (FloatingActionButton)findViewById(R.id.returnFab);
-
-        reportFBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ExpenseActivity.this, ReportActivity.class));
-            }
-        });
-
-        returnFBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ExpenseActivity.this, DashboardActivity.class));
-            }
-        });
-
-
-        IncomeTxt = (TextView)findViewById(R.id.txtIncome);
-        allowanceTxt = (TextView)findViewById(R.id.txtAllowance);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view =  inflater.inflate(R.layout.fragment_expense, container, false);
+        IncomeTxt = view.findViewById(R.id.txtIncome);
+        allowanceTxt = view.findViewById(R.id.txtAllowance);
+        returnBTn = view.findViewById(R.id.returnFab);
         total = 0;
         incomeTotal = 0;
-        expenseTxt = (TextView)findViewById(R.id.txtExpense);
-        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
+
+        expenseTxt = view.findViewById(R.id.txtExpense);
+        CalendarView calendarView=view.findViewById(R.id.calendarView);
         Calendar cal = Calendar.getInstance();
         final int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        expenseTxt.setText(CURRENCY_FORMAT.format(total).toString());
+        expenseTxt.setText(CURRENCY_FORMAT.format(total));
+
+        IncomeTxt = (TextView)view.findViewById(R.id.txtIncome);
+        allowanceTxt = (TextView)view.findViewById(R.id.txtAllowance);
+        total = 0;
+        incomeTotal = 0;
 
         currentUserDB.child("income");
         currentUserDB.child("income").addValueEventListener(new ValueEventListener() {
@@ -89,11 +87,18 @@ public class ExpenseActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 String value= month + "/" + dayOfMonth + "/" + year;
-                Intent i = new Intent(ExpenseActivity.this, DayExpenseActivity.class);
-                i.putExtra("key",value);
-                startActivity(i);
+//                Intent i = new Intent(getActivity(), DayExpenseActivity.class);
+//                i.putExtra("key",value);
+//                startActivity(i);
+                openDialog();
             }
 
         });
+        return view;
     }
+
+    public void openDialog(){
+        ExpenseDialog expenseDialog = new ExpenseDialog();
+    }
+
 }
