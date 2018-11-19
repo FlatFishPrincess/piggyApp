@@ -47,7 +47,7 @@
 
     <!--Expense Activity -->
     <string name="expenseTitle">Expense Calendar</string>
-    <string name="dailyAllowance">Daily Allowance</string>
+    <string name="dailyAllowance">Today Allowance</string>
     <string name="total">Total</string>
 
     <!-- TODO: Remove or change this placeholder text -->

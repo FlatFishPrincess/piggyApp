@@ -69,12 +69,15 @@ public class DayExpenseActivity extends AppCompatActivity {
 
                 dbref.child("value").setValue(amount);
                 dbref.child("date").setValue(value);
-
                 dbref.child("category").setValue(groupchoice);
 
                 Toast.makeText(getApplicationContext(), "Expense Saved", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(DayExpenseActivity.this, ExpenseActivity.class));
             }
         });
+
+
     }
+
+
 }
