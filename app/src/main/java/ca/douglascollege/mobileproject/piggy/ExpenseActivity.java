@@ -89,7 +89,12 @@ public class ExpenseActivity extends AppCompatActivity {
         currentUserDB.child("income").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String totalIncome = dataSnapshot.getValue().toString();
+                String totalIncome = "";
+                if(dataSnapshot.getValue() != null) {
+                    totalIncome = dataSnapshot.getValue().toString();
+                }else{
+                    totalIncome = "0.0";
+                }
                 IncomeTxt.setText(CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
 
                 incomeStored = totalIncome;

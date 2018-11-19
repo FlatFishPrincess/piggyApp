@@ -54,7 +54,11 @@ public class IncomeActivity extends AppCompatActivity {
         currentUserDB.child("income").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                resultTxt.setText(CURRENCY_FORMAT.format(dataSnapshot.getValue()));
+                if(dataSnapshot.getValue() == null){
+                    resultTxt.setText(CURRENCY_FORMAT.format(0));
+                }else {
+                    resultTxt.setText(CURRENCY_FORMAT.format(dataSnapshot.getValue()));
+                }
             }
 
             @Override
