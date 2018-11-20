@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="119dp"
+        android:text="What is the event name?"
+        android:textAlignment="center"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/savingNameTxt"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/savingAmtTxt"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="53dp"
+        android:background="@drawable/edit_text_custom"
+        android:hint="Event Name"
+        android:inputType="text"
+        android:padding="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="119dp"
+        android:layout_marginEnd="96dp"
+        android:text="How much do you want to save?"
+        android:textAlignment="center"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/savingAmtTxt"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="149dp"
+        android:layout_marginEnd="96dp"
+        android:background="@drawable/edit_text_custom"
+        android:hint="$ Savings Amount"
+        android:inputType="numberDecimal"
+        android:padding="5dp"
+        android:textAlignment="center" />
+
+</RelativeLayout>

@@ -47,7 +47,7 @@ public class ExpenseFragment extends Fragment {
     String dateValue;
 
     // Calendar clicked, Dialog input values
-    TextView amountSpentTxt, expenseNameTxt;
+    TextView amountSpentTxt, expenseNameTxt, dateTxt;
     double amountSpent;
     String expenseName, groupchoice;
     Spinner group;
@@ -108,7 +108,8 @@ public class ExpenseFragment extends Fragment {
 
                 // dateValue will be stored as date in database
                 dateValue= month + "/" + dayOfMonth + "/" + year;
-
+                dateTxt = expenseView.findViewById(R.id.dateTxt);
+                dateTxt.setText(dateValue);
                 builder.setView(expenseView)
                         .setTitle("Expense")
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

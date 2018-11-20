@@ -2,15 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
+    <!--<TextView-->
+        <!--android:id="@+id/descriptionTxt"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="101dp"-->
+        <!--android:layout_marginTop="29dp"-->
+        <!--android:text="@string/expense"-->
+        <!--android:textSize="24sp" />-->
+
     <TextView
         android:id="@+id/dateTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="59dp"
-        android:textSize="30sp" />
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="33dp"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/amountSpentTxt"
@@ -18,44 +30,40 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/expenseNameTxt"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="145dp"
-        android:layout_marginEnd="-5dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/amountTxt"
-        android:inputType="number" />
+        android:inputType="number"
+        android:padding="5dp"
+        android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/descriptionTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/dateTxt"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="95dp"
-        android:text="@string/expense"
-        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/expenseNameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/dateTxt"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="201dp"
+        android:layout_marginTop="142dp"
+        android:background="@drawable/edit_text_custom"
         android:ems="10"
         android:hint="@string/titleExpense"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        android:textAlignment="center" />
 
     <Spinner
         android:id="@+id/categorySpinner"
-        android:layout_width="216dp"
-        android:layout_height="55dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="255dp"
-        android:entries="@array/txtGroup" />
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/expenseNameTxt"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="101dp"
+        android:entries="@array/txtGroup"
+        android:padding="5dp"
+        android:textAlignment="center" />
 
 </RelativeLayout>
