@@ -19,7 +19,7 @@ import org.w3c.dom.Text;
 public class DayExpenseActivity extends AppCompatActivity {
 
     TextView date;
-    EditText amountSpent;
+    EditText amountSpent, nameExpense;
     Button save, cancel;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -40,11 +40,7 @@ public class DayExpenseActivity extends AppCompatActivity {
         cancel = (Button)findViewById(R.id.cancelBtn);
         amountSpent = (EditText) findViewById(R.id.amountSpentTxt);
         group = (Spinner)findViewById(R.id.categorySpinner);
-
-
-
-
-
+        nameExpense = (EditText)findViewById(R.id.expenseNameTxt);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -65,11 +61,13 @@ public class DayExpenseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 groupchoice = group.getSelectedItem().toString();
                 amount = Double.parseDouble(amountSpent.getText().toString());
+                name = nameExpense.getText().toString();
                 DatabaseReference dbref = currentUserDB.child("expenseList").child("expense").push();  ;
 
                 dbref.child("value").setValue(amount);
                 dbref.child("date").setValue(value);
                 dbref.child("category").setValue(groupchoice);
+                dbref.child("name").setValue(name);
 
                 Toast.makeText(getApplicationContext(), "Expense Saved", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(DayExpenseActivity.this, ExpenseActivity.class));

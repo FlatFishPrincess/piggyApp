@@ -1,14 +1,28 @@
 package ca.douglascollege.mobileproject.piggy;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SavingsActivity extends AppCompatActivity {
@@ -17,12 +31,23 @@ public class SavingsActivity extends AppCompatActivity {
     // adpater provides array as many as we need to create list view, manage performance
     private SavingRecyclerAdapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerLayoutManager;
-
     private Button addBtn;
     private EditText eventTxt;
     private EditText savingAmtTxt;
+    private TextView savTxt;
+    int position = 0;
+    String event,svAmount;
+    DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
+
 
     // TODO: customizing alert dialog layout, handle user account
+    // this here catches the firebase and the database
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+    // this is a database based on the child of the "users" field of the main database
+    final DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
+
+
 
     private ArrayList<SavingRecyclerView> savingsList;
     @Override
@@ -30,30 +55,88 @@ public class SavingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings);
 
-        createSavingList();
-        buildRecyclerView();
+
 
         addBtn = findViewById(R.id.btnAdd);
         eventTxt = findViewById(R.id.txtEvent);
         savingAmtTxt = findViewById(R.id.txtSavingAmt);
 
+        savTxt = (TextView)findViewById(R.id.savingsTxt);
+
+
+        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(0) + " so far");
+                }else {
+                    savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(dataSnapshot.getValue()) + " so far");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        currentUserDB.child("savings").addValueEventListener(new ValueEventListener() {
+            @Override
+
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    createSavingList();
+                    buildRecyclerView();
+                }else {
+                    createSavingList();
+                    buildRecyclerView();
+                    for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if (ds.child("name").getValue() != null && ds.child("value").getValue() != null) {
+                            String event = ds.child("name").getValue(String.class);
+                            double value = ds.child("value").getValue(Double.class);
+                            String val = String.valueOf(value);
+                            try {
+                                savingsList.add(new SavingRecyclerView(R.drawable.ic_event_available_black_24dp, event, val));
+                            }
+                            catch(Exception e){
+                                String a = e.getMessage();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         // Add button clicked
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // position for list
-                int position = 0;
                 // get event name
-                String event = eventTxt.getText().toString();
+                event = eventTxt.getText().toString();
+                svAmount = savingAmtTxt.getText().toString();
                 double savingAmt = Double.parseDouble(savingAmtTxt.getText().toString());
-
                 // If user did not enter name or amount, get toast message
                 // If user input correctly, call insertItem method
-                if(event == "" || savingAmtTxt.getText().toString() == ""){
-                    Toast.makeText(SavingsActivity.this, "Please Enter name and amount", Toast.LENGTH_LONG).show();
+
+                DatabaseReference dbref = currentUserDB.child("savings").push();
+                dbref.child("name").setValue(event);
+                dbref.child("value").setValue(savingAmt);
+
+
+                if(event.equals(null) || svAmount.equals(null)){
+                    //Toast.makeText(SavingsActivity.this, "Please enter name and amoutn", Toast.LENGTH_LONG).show();
                 } else {
                     insertItem(0, event, savingAmt);
                 }
+                position = position + 1;
             }
         });
         // get Saving event
@@ -62,12 +145,15 @@ public class SavingsActivity extends AppCompatActivity {
     // This method inserts Item into List
     public void insertItem(int position, String event, double savingAmt){
         String amt = "$" + savingAmt;
-        savingsList.add(position, new SavingRecyclerView(R.drawable.ic_event_available_black_24dp, event, amt));
+        savingsList.add(new SavingRecyclerView(R.drawable.ic_event_available_black_24dp, event, amt));
         recyclerAdapter.notifyItemChanged(position);
     }
 
-    public void deleteItem(int position){
-        // remove position from list
+    public void deleteItem(final int position){
+        //final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        //currentUserDB.child("savings").removeValue();
+        currentUserDB.child("savings").orderByChild("name").equalTo(savingsList.get(position).getText1()).getRef().setValue(null);
+        //currentUserDB.child("savings").orderByChild("name").equalTo(savingsList.get(position).getText1()).getRef().removeValue();
         savingsList.remove(position);
         // this is for animation
         recyclerAdapter.notifyItemRemoved(position);
@@ -82,7 +168,6 @@ public class SavingsActivity extends AppCompatActivity {
     // add the first list item as default
     public void createSavingList(){
         savingsList = new ArrayList<>();
-        savingsList.add(new SavingRecyclerView(R.drawable.currency_icon, "Event Name", "Saving Amount"));
     }
 
 
@@ -94,6 +179,7 @@ public class SavingsActivity extends AppCompatActivity {
         recyclerAdapter = new SavingRecyclerAdapter(savingsList);
         recyclerView.setLayoutManager(recyclerLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
+
         recyclerAdapter.setOnItemClickListener(new SavingRecyclerAdapter.OnSavingItemClickListener() {
             @Override
             public void onItemClick(int position) {

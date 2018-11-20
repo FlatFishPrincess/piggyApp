@@ -5,15 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SavingsActivity">
-    
+
+    <TextView
+        android:id="@+id/savingsTxt"
+        android:layout_width="312dp"
+        android:layout_height="47dp"
+        android:layout_alignEnd="@+id/txtSavingAmt"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-126dp"
+        android:layout_marginBottom="500dp"
+        android:textColor="@color/orange"
+        android:textSize="18sp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="339dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="80dp"
         android:padding="4dp"
-        android:scrollbars="vertical"
-        android:layout_marginBottom="150dp">
-    </android.support.v7.widget.RecyclerView>
+        android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
     <EditText
         android:id="@+id/txtEvent"
@@ -47,4 +64,5 @@
         android:text="Add Event"
         android:textColor="@color/textWhite"
         android:background="@drawable/button_custom"/>
+
 </RelativeLayout>
