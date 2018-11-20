@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ExpenseDialog extends AppCompatDialogFragment {
+public class ExpenseDialogFragment extends AppCompatDialogFragment {
 
 //    private ExpenseDialogListener listener;
     TextView date;
@@ -36,7 +36,7 @@ public class ExpenseDialog extends AppCompatDialogFragment {
    public Dialog onCreateDialog(Bundle savedInstanceState){
        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        LayoutInflater inflater = getActivity().getLayoutInflater();
-       View view = inflater.inflate(R.layout.expense_calendar_clicked_dialog, null);
+       View view = inflater.inflate(R.layout.fragment_expense_dialog, null);
 
         builder.setView(view)
                 .setTitle("Expense")

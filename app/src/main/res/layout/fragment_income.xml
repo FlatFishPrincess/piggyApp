@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IncomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="45dp">
+
+        <TextView
+            android:id="@+id/txtResult2"
+            android:layout_width="wrap_content"
+            android:layout_height="208dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="153dp"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="197dp"
+            android:background="@drawable/box_custom"
+            android:gravity="bottom|center"
+            android:paddingBottom="20dp"
+            android:text="Current Total Income"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="130dp"
+            android:elevation="20dp"
+            android:src="@drawable/currency_icon" />
+
+        <Button
+            android:id="@+id/btnIncome"
+            android:layout_width="275dp"
+            android:layout_height="31dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="125dp"
+            android:background="@drawable/button_custom"
+            android:text="@string/enterIncome"
+            android:textColor="@color/textWhite" />
+
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="120dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="134dp"
+            android:layout_marginTop="225dp"
+            android:layout_marginEnd="130dp"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -37,7 +37,12 @@ public class DashboardFragment extends Fragment {
         income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), IncomeActivity.class));
+//                startActivity(new Intent(getActivity(), IncomeActivity.class));
+                IncomeFragment incomeFragment = new IncomeFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.dashboard_frame, incomeFragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -60,7 +65,12 @@ public class DashboardFragment extends Fragment {
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ReportActivity.class));
+//                startActivity(new Intent(getActivity(), ReportActivity.class));
+                ReportFragment reportFragment = new ReportFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.dashboard_frame, reportFragment);
+                fragmentTransaction.commit();
             }
         });
 
