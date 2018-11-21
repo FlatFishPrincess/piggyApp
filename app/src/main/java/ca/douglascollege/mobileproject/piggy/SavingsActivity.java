@@ -40,6 +40,7 @@ public class SavingsActivity extends AppCompatActivity {
     String event,svAmount;
     String key;
     DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
+    double saved;
 
 
     // TODO: customizing alert dialog layout, handle user account
@@ -63,7 +64,7 @@ public class SavingsActivity extends AppCompatActivity {
         savingAmtTxt = findViewById(R.id.txtSavingAmt);
 
         savTxt = (TextView)findViewById(R.id.savingsTxt);
-
+        saved = 0;
 
         currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,6 +73,7 @@ public class SavingsActivity extends AppCompatActivity {
                     savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(0) + " so far");
                 }else {
                     savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(dataSnapshot.getValue()) + " so far");
+                    saved = Double.parseDouble(dataSnapshot.getValue().toString());
                 }
             }
 
@@ -171,9 +173,6 @@ public class SavingsActivity extends AppCompatActivity {
         recyclerAdapter.notifyItemChanged(position);
     }
 
-
-
-
     // add the first list item as default
     public void createSavingList(){
         savingsList = new ArrayList<>();
@@ -193,7 +192,11 @@ public class SavingsActivity extends AppCompatActivity {
         recyclerAdapter.setOnItemClickListener(new SavingRecyclerAdapter.OnSavingItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                changeText(position, "Clicked");
+                
+                    changeText(position, "Clicked");
+
+
+
             }
 
             @Override
