@@ -168,7 +168,7 @@ public class ExpenseFragment extends Fragment {
                 // the 5 inside get is because it corresponds of the month value of the Calendar
                 // changed 5 to DAY_OF_MONTH
                 // TODO: get(5) => (Calendar.DAY_OF_MONTH) , is it the same?
-                int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                int day = Calendar.getInstance().get(5);
 
                 // this method here will calculate the new allowance if the user overspent the daily allowance that was provided
                 Double todaysAllowance = GetTodayAllowance(inc, baseDailyAllowance, day, daysInMonth, overExp);
@@ -196,7 +196,7 @@ public class ExpenseFragment extends Fragment {
                 View expenseView = inflater.inflate(R.layout.fragment_expense_dialog, null);
 
                 // dateValue will be stored as date in database
-                dateValue= month + "/" + dayOfMonth + "/" + year;
+                dateValue= (month + 1) + "/" + dayOfMonth + "/" + year;
                 dateTxt = expenseView.findViewById(R.id.dateTxt);
                 dateTxt.setText(dateValue);
                 builder.setView(expenseView)
@@ -215,8 +215,9 @@ public class ExpenseFragment extends Fragment {
                                 groupchoice = group.getSelectedItem().toString();
 
                                 DatabaseReference dbref = currentUserDB.child("expenseList").child("expense").push();  ;
-                                dbref.child("date").setValue(dateValue);
+
                                 dbref.child("value").setValue(amount);
+                                dbref.child("date").setValue(dateValue);
                                 dbref.child("category").setValue(groupchoice);
                                 dbref.child("name").setValue(name);
 
@@ -274,9 +275,9 @@ public class ExpenseFragment extends Fragment {
 
         // get(1) => Calendar.YEAR
         // TODO: get(1) => Calendar.YEAR
-        String todayS = "" + Calendar.getInstance().get(Calendar.YEAR);//today's year
+        String todayS = "" + Calendar.getInstance().get(1);//today's year
         // TODO: get(2) + 1 => Calendar.MONTH + 1
-        int mon = Calendar.getInstance().get(Calendar.MONTH) + 1; //today's month get(2)+1; //before
+        int mon = Calendar.getInstance().get(2) + 1; //today's month get(2)+1; //before
         if(mon < 10){
             todayS = todayS + "0" + mon;
         }else{
