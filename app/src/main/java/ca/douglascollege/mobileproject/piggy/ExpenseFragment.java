@@ -113,7 +113,8 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-        // now we must call the field called expenseList to access the child field called expense to calculate all the expenses that the user had for this month
+        // now we must call the field called expenseList to access the child field called expense
+        // to calculate all the expenses that the user had for this month
         DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
         expenseListRef.keepSynced(true);
         expenseListRef.addValueEventListener(new ValueEventListener() {
@@ -133,7 +134,7 @@ public class ExpenseFragment extends Fragment {
                     exp.value = ds.child("value").getValue(Double.class);
                     // adding the expense inside the ArrayList
                     expenses.add(exp);
-                    // TODO: Find error, null reference. why?
+                    // TODO: Found error, null reference. why?
                     expense = expense + ds.child("value").getValue(Double.class);
                 }
                 // displaying the total expense into the expense text field

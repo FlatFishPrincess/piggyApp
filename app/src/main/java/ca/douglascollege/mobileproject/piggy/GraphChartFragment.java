@@ -1,8 +1,12 @@
 package ca.douglascollege.mobileproject.piggy;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -16,33 +20,62 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportActivity extends AppCompatActivity {
 
-    private PieChart pieChart;
-    private BarChart barChart;
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class GraphChartFragment extends Fragment {
 
-    // TODO: color theme, connect database and put values into graph chart array
+    PieChart pieChart;
+    BarChart barChart;
+
+    // Currency format
+    DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
+
+    // this here catches the firebase and the database
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+    // this is a database based on the child of the "users" field of the main database
+    final DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
+
+    public GraphChartFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_report, container, false);
 
-        // get piechart
+        // get piechart and bar chart
+        pieChart = view.findViewById(R.id.pieChart);
+        barChart = view.findViewById(R.id.barChart);
+
+        // call piechart method
         getPieChart();
-
-        // get bar chart
+        // call bar chart method
         getBarChart();
 
+        // now we must call the field called expenseList to access the child field called expense
+        // to calculate all the expenses that the user had for this month
+        DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
+        expenseListRef.keepSynced(true);
+
+        return view;
     }
 
     private void getPieChart(){
 
-        pieChart = findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
@@ -83,7 +116,6 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     private void getBarChart(){
-        barChart = findViewById(R.id.barChart);
 
         //bar chart values
         ArrayList<BarEntry> entries = new ArrayList<>();
