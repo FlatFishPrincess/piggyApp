@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -58,7 +57,11 @@ public class IncomeFragment extends Fragment {
         currentUserDB.child("income").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                resultTxt.setText(CURRENCY_FORMAT.format(dataSnapshot.getValue()));
+                if(dataSnapshot.getValue() == null){
+                    resultTxt.setText(CURRENCY_FORMAT.format(0));
+                }else {
+                    resultTxt.setText(CURRENCY_FORMAT.format(dataSnapshot.getValue()));
+                }
             }
 
             @Override
@@ -87,8 +90,7 @@ public class IncomeFragment extends Fragment {
                         income = Double.parseDouble(user_input.getText().toString());
 
                         currentUserDB.child("income").setValue(income);
-
-                        Toast.makeText(getActivity(), "input" + income, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getActivity(), "input" + income, Toast.LENGTH_LONG).show();
                         resultTxt.setText(CURRENCY_FORMAT.format(income));
                     }
                 });

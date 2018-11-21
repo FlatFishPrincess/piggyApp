@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SavingsActivity">
 
+
     <TextView
         android:id="@+id/savingsTxt"
         android:layout_width="312dp"
@@ -24,14 +25,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="339dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="match_parent"
         android:padding="4dp"
-        android:scrollbars="vertical">
-
+        android:scrollbars="vertical"
+        android:layout_marginBottom="150dp">
     </android.support.v7.widget.RecyclerView>
 
     <EditText
@@ -50,7 +47,7 @@
         android:layout_height="50dp"
         android:layout_alignBottom="@+id/btnAdd"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="39dp"
         android:layout_marginBottom="-11dp"
         android:hint="Saving Amt"
         android:inputType="number" />
@@ -67,4 +64,16 @@
         android:textColor="@color/textWhite"
         android:background="@drawable/button_custom"/>
 
+    <io.github.kobakei.materialfabspeeddial.FabSpeedDial
+        android:id="@+id/addFabIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10dp"
+        app:fab_menu="@menu/add_event_fab"
+        app:fab_miniFabTextColor="@color/textWhite"
+        app:fab_fabBackgroundColor="@color/orange"
+        app:fab_miniFabBackgroundColor="@color/orange"
+         />
 </RelativeLayout>

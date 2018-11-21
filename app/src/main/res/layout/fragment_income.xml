@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/txtResult2"
             android:layout_width="wrap_content"
-            android:layout_height="208dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -44,7 +44,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="66dp"
-            android:layout_marginBottom="125dp"
+            android:layout_marginBottom="143dp"
             android:background="@drawable/button_custom"
             android:text="@string/enterIncome"
             android:textColor="@color/textWhite" />

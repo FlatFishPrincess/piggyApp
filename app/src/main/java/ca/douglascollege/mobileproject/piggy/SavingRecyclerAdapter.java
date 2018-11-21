@@ -91,6 +91,7 @@ public class SavingRecyclerAdapter extends RecyclerView.Adapter<SavingRecyclerAd
 
     @Override
     public int getItemCount() {
-        return _savingList.size();
+//        savingList.size();
+        return  0;
     }
 }
