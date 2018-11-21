@@ -80,11 +80,6 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), SavingsActivity.class));
-//                SavingsFragment savingsFragment = new SavingsFragment();
-//                FragmentManager fragmentManager = getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.dashboard_frame, savingsFragment);
-//                fragmentTransaction.commit();
             }
         });
         return  rootView;

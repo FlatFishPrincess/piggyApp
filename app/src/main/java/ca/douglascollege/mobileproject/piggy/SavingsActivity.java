@@ -1,14 +1,19 @@
 package ca.douglascollege.mobileproject.piggy;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import io.github.kobakei.materialfabspeeddial.FabSpeedDial;
+
 public class SavingsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -27,6 +34,7 @@ public class SavingsActivity extends AppCompatActivity {
     private SavingRecyclerAdapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerLayoutManager;
     private Button addBtn;
+    private FabSpeedDial fab;
     private EditText eventTxt;
     private EditText savingAmtTxt;
     private TextView savTxt;
@@ -51,12 +59,11 @@ public class SavingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings);
 
-
         addBtn = findViewById(R.id.btnAdd);
         eventTxt = findViewById(R.id.txtEvent);
         savingAmtTxt = findViewById(R.id.txtSavingAmt);
 
-        savTxt = (TextView)findViewById(R.id.savingsTxt);
+        savTxt = findViewById(R.id.savingsTxt);
         saved = 0;
 
         currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
@@ -77,9 +84,8 @@ public class SavingsActivity extends AppCompatActivity {
         });
 
         currentUserDB.child("savings").addValueEventListener(new ValueEventListener() {
+
             @Override
-
-
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue() == null){
                     createSavingList();
@@ -111,33 +117,51 @@ public class SavingsActivity extends AppCompatActivity {
             }
         });
 
-        // Add button clicked
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // get event name
-                event = eventTxt.getText().toString();
-                svAmount = savingAmtTxt.getText().toString();
-                double savingAmt = Double.parseDouble(savingAmtTxt.getText().toString());
-                // If user did not enter name or amount, get toast message
-                // If user input correctly, call insertItem method
+        // floating icon clicked, add event
+        fab = findViewById(R.id.addFabIcon);
+        fab.addOnMenuItemClickListener(new FabSpeedDial.OnMenuItemClickListener() {
+           public void onMenuItemClick(FloatingActionButton fab, TextView textView, int itemId) {
+               AlertDialog.Builder builder = new AlertDialog.Builder(SavingsActivity.this);
+               final View expenseView = LayoutInflater.from(SavingsActivity.this).inflate(R.layout.fragment_savings_dialog, null);
 
-                key = currentUserDB.child("savings").push().getKey();
-                final DatabaseReference dbref = currentUserDB.child("savings").child(key);
-                dbref.child("savingId").setValue(key);
-                dbref.child("name").setValue(event);
-                dbref.child("value").setValue(savingAmt);
+               builder.setView(expenseView)
+                       .setTitle("Savings")
+                       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               Toast.makeText(SavingsActivity.this, "cancel clicked", Toast.LENGTH_LONG).show();
+                           }
+                       })
+                       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               event = eventTxt.getText().toString();
+                               svAmount = savingAmtTxt.getText().toString();
+                               double savingAmt = Double.parseDouble(savingAmtTxt.getText().toString());
 
+                               // get the key of child
+                               key = currentUserDB.child("savings").push().getKey();
+                               final DatabaseReference dbref = currentUserDB.child("savings").child(key);
+                               dbref.child("savingId").setValue(key);
+                               dbref.child("name").setValue(event);
+                               dbref.child("value").setValue(savingAmt);
 
-                if(event.equals(null) || svAmount.equals(null)){
-                    //Toast.makeText(SavingsActivity.this, "Please enter name and amoutn", Toast.LENGTH_LONG).show();
-                } else {
-                    insertItem(0, event, savingAmt, key);
-                }
-                position = position + 1;
-            }
-        });
-        // get Saving event
+                               // If user did not enter name or amount, get toast message
+                               // If user input correctly, call insertItem method
+                               if(event.equals(null) || svAmount.equals(null)){
+                                   Toast.makeText(SavingsActivity.this, "Please enter name and amount", Toast.LENGTH_LONG).show();
+                               } else {
+                                    Toast.makeText(SavingsActivity.this, event + " "+ savingAmt, Toast.LENGTH_LONG).show();
+                                   insertItem(0, event, savingAmt, key);
+                               }
+                               position = position + 1;
+                           }
+                       });
+               eventTxt = expenseView.findViewById(R.id.savingNameTxt);
+               savingAmtTxt = expenseView.findViewById(R.id.savingAmtTxt);
+               builder.show();
+           }
+       });
     }
 
     // This method inserts Item into List
@@ -184,7 +208,7 @@ public class SavingsActivity extends AppCompatActivity {
         recyclerAdapter.setOnItemClickListener(new SavingRecyclerAdapter.OnSavingItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                changeText(position, "Clicked");
+//                changeText(position, "Clicked");
             }
 
             @Override
