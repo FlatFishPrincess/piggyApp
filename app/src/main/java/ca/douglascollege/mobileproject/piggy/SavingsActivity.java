@@ -50,6 +50,7 @@ public class SavingsActivity extends AppCompatActivity {
     final DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
 
     private ArrayList<SavingRecyclerView> savingsList;
+    private ArrayList<String> keyList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +81,6 @@ public class SavingsActivity extends AppCompatActivity {
             }
         });
 
-
-
         currentUserDB.child("savings").addValueEventListener(new ValueEventListener() {
             @Override
 
@@ -97,9 +96,11 @@ public class SavingsActivity extends AppCompatActivity {
                         if (ds.child("name").getValue() != null && ds.child("value").getValue() != null) {
                             String event = ds.child("name").getValue(String.class);
                             double value = ds.child("value").getValue(Double.class);
+                            String chave = ds.child("savingId").getValue(String.class);
                             String val = String.valueOf(value);
                             try {
                                 savingsList.add(new SavingRecyclerView(R.drawable.ic_event_available_black_24dp, event, val));
+                                keyList.add(chave);
                             }
                             catch(Exception e){
                                 String a = e.getMessage();
@@ -128,6 +129,7 @@ public class SavingsActivity extends AppCompatActivity {
 
                 key = currentUserDB.child("savings").push().getKey();
                 final DatabaseReference dbref = currentUserDB.child("savings").child(key);
+                dbref.child("savingId").setValue(key);
                 dbref.child("name").setValue(event);
                 dbref.child("value").setValue(savingAmt);
 
@@ -135,7 +137,7 @@ public class SavingsActivity extends AppCompatActivity {
                 if(event.equals(null) || svAmount.equals(null)){
                     //Toast.makeText(SavingsActivity.this, "Please enter name and amoutn", Toast.LENGTH_LONG).show();
                 } else {
-                    insertItem(0, event, savingAmt);
+                    insertItem(0, event, savingAmt, key);
                 }
                 position = position + 1;
             }
@@ -144,22 +146,22 @@ public class SavingsActivity extends AppCompatActivity {
     }
 
     // This method inserts Item into List
-    public void insertItem(int position, String event, double savingAmt){
+    public void insertItem(int position, String event, double savingAmt, String keyS){
         String amt = "$" + savingAmt;
         savingsList.add(new SavingRecyclerView(R.drawable.ic_event_available_black_24dp, event, amt));
+        keyList.add(keyS);
         recyclerAdapter.notifyItemChanged(position);
     }
 
     public void deleteItem(final int position){
-        //currentUserDB.child("savings").removeValue();
-        //currentUserDB.child("savings").getRef();
-        //currentUserDB.child(key).removeValue();
-        String name = savingsList.get(position).getText1();
-        currentUserDB.child("savings").child(key).child("name").equalTo(name).getRef().removeValue();
 
-        //currentUserDB.child("savings").orderByChild("name").equalTo(savingsList.get(position).getText1()).getRef().removeValue();
+        String name = savingsList.get(position).getText1();
+
+        currentUserDB.child("savings").child(keyList.get(position)).removeValue();
+
 
         savingsList.remove(position);
+        keyList.remove(position);
         // this is for animation
         recyclerAdapter.notifyItemRemoved(position);
     }
@@ -175,6 +177,7 @@ public class SavingsActivity extends AppCompatActivity {
     // add the first list item as default
     public void createSavingList(){
         savingsList = new ArrayList<>();
+        keyList = new ArrayList<>();
     }
 
 
