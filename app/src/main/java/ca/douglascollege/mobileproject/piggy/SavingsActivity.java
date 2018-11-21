@@ -2,6 +2,7 @@ package ca.douglascollege.mobileproject.piggy;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class SavingsActivity extends AppCompatActivity {
     private TextView savTxt;
     int position = 0;
     String event,svAmount;
+    String key;
     DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
 
 
@@ -46,8 +48,6 @@ public class SavingsActivity extends AppCompatActivity {
     final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
     // this is a database based on the child of the "users" field of the main database
     final DatabaseReference currentUserDB = mDatabase.child(firebaseAuth.getCurrentUser().getUid());
-
-
 
     private ArrayList<SavingRecyclerView> savingsList;
     @Override
@@ -126,7 +126,8 @@ public class SavingsActivity extends AppCompatActivity {
                 // If user did not enter name or amount, get toast message
                 // If user input correctly, call insertItem method
 
-                DatabaseReference dbref = currentUserDB.child("savings").push();
+                key = currentUserDB.child("savings").push().getKey();
+                final DatabaseReference dbref = currentUserDB.child("savings").child(key);
                 dbref.child("name").setValue(event);
                 dbref.child("value").setValue(savingAmt);
 
@@ -150,10 +151,14 @@ public class SavingsActivity extends AppCompatActivity {
     }
 
     public void deleteItem(final int position){
-        //final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         //currentUserDB.child("savings").removeValue();
-        currentUserDB.child("savings").orderByChild("name").equalTo(savingsList.get(position).getText1()).getRef().setValue(null);
+        //currentUserDB.child("savings").getRef();
+        //currentUserDB.child(key).removeValue();
+        String name = savingsList.get(position).getText1();
+        currentUserDB.child("savings").child(key).child("name").equalTo(name).getRef().removeValue();
+
         //currentUserDB.child("savings").orderByChild("name").equalTo(savingsList.get(position).getText1()).getRef().removeValue();
+
         savingsList.remove(position);
         // this is for animation
         recyclerAdapter.notifyItemRemoved(position);
@@ -163,6 +168,8 @@ public class SavingsActivity extends AppCompatActivity {
         savingsList.get(position).changeText1(text);
         recyclerAdapter.notifyItemChanged(position);
     }
+
+
 
 
     // add the first list item as default
@@ -188,6 +195,7 @@ public class SavingsActivity extends AppCompatActivity {
 
             @Override
             public void onDeleteClick(int position) {
+
                 deleteItem(position);
             }
 
