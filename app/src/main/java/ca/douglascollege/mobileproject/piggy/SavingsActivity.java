@@ -192,7 +192,7 @@ public class SavingsActivity extends AppCompatActivity {
         recyclerAdapter.setOnItemClickListener(new SavingRecyclerAdapter.OnSavingItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                
+
                     changeText(position, "Clicked");
 
 
