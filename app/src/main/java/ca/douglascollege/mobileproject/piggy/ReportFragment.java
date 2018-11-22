@@ -107,11 +107,11 @@ public class ReportFragment extends Fragment {
         DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
         expenseListRef.keepSynced(true);
 
+        expense = 0;
         expenseListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    expense = 0;
                     ExpenseReport expenseReport = new ExpenseReport();
                     // adding the date inside the date field of the Expense class
                     expenseReport.name = ds.child("name").getValue(String.class);
