@@ -106,12 +106,12 @@ public class ReportFragment extends Fragment {
         adapter = new ArrayAdapter<String>(view.getContext(), R.layout.activity_expense_entries, R.id.expenseEntries, list);
         DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
         expenseListRef.keepSynced(true);
-
+        expense = 0;
         expenseListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    expense = 0;
+
                     ExpenseReport expenseReport = new ExpenseReport();
                     // adding the date inside the date field of the Expense class
                     expenseReport.name = ds.child("name").getValue(String.class);
@@ -140,6 +140,13 @@ public class ReportFragment extends Fragment {
                     savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
                     list.add("Savings     " + CURRENCY_FORMAT.format(savingsAmt));
                 }
+                if(savingsAmt > 0){
+                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+                    goodJob.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+                    badJob.setVisibility(View.VISIBLE);
+                }
                 reportListView.setAdapter(adapter);
             }
 
@@ -148,19 +155,8 @@ public class ReportFragment extends Fragment {
 
             }
         });
-
-        getReportResult();
+        
         return view;
-    }
-
-    public void getReportResult(){
-        if(savingsAmt > 0){
-            Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-            goodJob.setVisibility(View.VISIBLE);
-        } else {
-            Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-            badJob.setVisibility(View.VISIBLE);
-        }
     }
 
 }
