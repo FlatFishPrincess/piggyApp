@@ -329,7 +329,7 @@ public class ExpenseFragment extends Fragment {
     private Double GetTodayAllowance(Double income, Double baseDailyAllowance, int today, int numberOfDays, Double overExpended){
         Double output = 0.0;
 
-        output = (income - (((today - 1)*baseDailyAllowance) + overExpended))/(numberOfDays-today);
+        output = (income - (((today - 1)*baseDailyAllowance) + overExpended))/(numberOfDays-today+1);
 
         return output;
     }
