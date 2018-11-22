@@ -6,21 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".SavingsActivity">
 
+    <ImageView
+        android:id="@+id/goBackIcon"
+        android:layout_width="38dp"
+        android:layout_height="39dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:elevation="15dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:tint="@color/orange"
+        />
 
     <TextView
         android:id="@+id/savingsTxt"
-        android:layout_width="312dp"
-        android:layout_height="47dp"
-        android:layout_alignEnd="@+id/txtSavingAmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goBackIcon"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="-126dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="0dp"
         android:textColor="@color/orange"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -28,7 +34,7 @@
         android:layout_height="match_parent"
         android:padding="4dp"
         android:scrollbars="vertical"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="85dp">
     </android.support.v7.widget.RecyclerView>
 
     <io.github.kobakei.materialfabspeeddial.FabSpeedDial
