@@ -13,7 +13,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

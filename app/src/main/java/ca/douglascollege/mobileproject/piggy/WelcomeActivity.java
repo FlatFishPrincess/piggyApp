@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button signInBtn;
     private Button registerBtn;
     private ImageView piggyIcon;
+    private ProgressBar progressBar;
 
     // Firebase is for sign up and registration for authentication
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -38,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         piggyIcon = findViewById(R.id.piggyImg);
-
+        progressBar = findViewById(R.id.progressBar1);
         // Sign Button clicked, login user method
         signInBtn = findViewById(R.id.btnSignIn);
         signInBtn.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 loginUser();
             }
         });
+
 
         // Register button clicked, go to RegisterActivitiy
         registerBtn = findViewById(R.id.btnRegister);
@@ -92,6 +95,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //                            Log.d("success_signIn", "signInWithEmail:success");
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                                progressBar.setVisibility(View.VISIBLE);
                                 // Start Dashboard Activitiy with animation.
                                 // Piggy Icon is a shared transition item.
                                 Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
@@ -99,14 +103,17 @@ public class WelcomeActivity extends AppCompatActivity {
                                         WelcomeActivity.this, piggyIcon, ViewCompat.getTransitionName(piggyIcon)
                                 );
                                 startActivity(dashboardIntent, options.toBundle());
+                                progressBar.setVisibility(View.INVISIBLE);
 //                            startActivity(new Intent(WelcomeActivity.this, DashboardActivity.class));
 //                            Toast.makeText(WelcomeActivity.this, "Sign In successfully.",
 //                                    Toast.LENGTH_SHORT).show();
                             } else {
                                 // If sign in fails, display a fail message to the user.
+                                progressBar.setVisibility(View.VISIBLE);
                                 Log.w("failure_signIn", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(WelcomeActivity.this, "Please try again or Register.",
                                         Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
 
                         }

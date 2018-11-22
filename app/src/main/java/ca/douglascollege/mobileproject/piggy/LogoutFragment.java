@@ -69,5 +69,7 @@ public class LogoutFragment extends Fragment {
             }
         });
         return view;
+
     }
+
 }
