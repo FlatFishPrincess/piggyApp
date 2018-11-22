@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 
 /**
@@ -25,11 +29,15 @@ import java.text.DecimalFormat;
  */
 public class ReportFragment extends Fragment {
 
-    PieChart pieChart;
-    BarChart barChart;
-
+    ListView reportListView;
+    TextView incomeTxt, expenseTxt;
+    ImageView goodJob, badJob;
     // Currency format
     DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+
+    double expense, savingsAmt;
 
     // this here catches the firebase and the database
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -50,18 +58,23 @@ public class ReportFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_report, container, false);
 
-        // get piechart and bar chart
-        pieChart = view.findViewById(R.id.pieChart);
-        barChart = view.findViewById(R.id.barChart);
+        reportListView = view.findViewById(R.id.reportList);
+        incomeTxt = view.findViewById(R.id.income);
+        expenseTxt = view.findViewById(R.id.expense);
+        goodJob = view.findViewById(R.id.goodJob);
+        badJob = view.findViewById(R.id.badJob);
+
+        // this list will be displayed in reportListView
+        list = new ArrayList<String>();
+
+//
+//        // now we must call the field called expenseList to access the child field called expense
+//        // to calculate all the expenses that the user had for this month
+//        DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
+//        expenseListRef.keepSynced(true);
 
 
-        // now we must call the field called expenseList to access the child field called expense
-        // to calculate all the expenses that the user had for this month
-        DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
-        expenseListRef.keepSynced(true);
-
-
-        // here we are accessing the data of the "income" field inside the "users" field of the database
+//         here we are accessing the data of the "income" field inside the "users" field of the database
         currentUserDB.child("income");
         currentUserDB.child("income").addValueEventListener(new ValueEventListener() {
             // this method is used to retrieve data from the database
@@ -76,13 +89,9 @@ public class ReportFragment extends Fragment {
                 }else{
                     totalIncome = "0.0";
                 }
-                IncomeTxt.setText(CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
+//                incomeTxt.setText(CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
+                list.add("Income" + "       " + CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
 
-                incomeStored = totalIncome;
-                income = Double.parseDouble(incomeStored);
-                // this will get the income that the user entered, divide it by the number of days in the current month to give us the day allowance
-                incomeTotal = income / daysInMonth;
-                allowanceTxt.setText(CURRENCY_FORMAT.format(incomeTotal));
             }
 
             @Override
@@ -91,7 +100,67 @@ public class ReportFragment extends Fragment {
             }
         });
 
+        // now we must call the field called expenseList to access the child field called expense
+        // to calculate all the expenses that the user had for this month
 
+        adapter = new ArrayAdapter<String>(view.getContext(), R.layout.activity_expense_entries, R.id.expenseEntries, list);
+        DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
+        expenseListRef.keepSynced(true);
+
+        expenseListRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    expense = 0;
+                    ExpenseReport expenseReport = new ExpenseReport();
+                    // adding the date inside the date field of the Expense class
+                    expenseReport.name = ds.child("name").getValue(String.class);
+                    // adding the value inside the date field of the Expense class
+                    expenseReport.value = ds.child("value").getValue(Double.class);
+                    // adding the expense inside the ArrayList
+                    list.add(expenseReport.getName() + "      "  + CURRENCY_FORMAT.format(expenseReport.getValue()));
+                    expense = expense + ds.child("value").getValue(Double.class);
+                }
+                list.add("");
+                list.add("Total Expense                        " + CURRENCY_FORMAT.format(expense));
+                list.add("");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    list.add("Savings     " + CURRENCY_FORMAT.format(0));
+                }else {
+                    savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
+                    list.add("Savings     " + CURRENCY_FORMAT.format(savingsAmt));
+                }
+                reportListView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        getReportResult();
         return view;
     }
+
+    public void getReportResult(){
+        if(savingsAmt > 0){
+            Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+            goodJob.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+            badJob.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

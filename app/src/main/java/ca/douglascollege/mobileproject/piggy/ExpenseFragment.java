@@ -134,7 +134,6 @@ public class ExpenseFragment extends Fragment {
                     exp.value = ds.child("value").getValue(Double.class);
                     // adding the expense inside the ArrayList
                     expenses.add(exp);
-                    // TODO: Found error, null reference. why?
                     expense = expense + ds.child("value").getValue(Double.class);
                 }
                 // displaying the total expense into the expense text field

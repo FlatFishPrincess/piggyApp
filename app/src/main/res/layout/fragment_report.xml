@@ -10,36 +10,60 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Monthly Report Chart"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textColor="@color/textBlack"/>
+        android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="99dp"
+            android:gravity="center"
+            android:text="Monthly Report Chart"
+            android:textAlignment="center"
+            android:textColor="@color/textBlack"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+
+            <ListView
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:id="@+id/reportList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="220dp">
+            </ListView>
+        </LinearLayout>
 
         <ImageView
+            android:id="@+id/goodJob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="54dp"
-            android:layout_marginBottom="74dp"
-            app:srcCompat="@drawable/great_job" />
+            android:layout_marginStart="51dp"
+            android:layout_marginBottom="116dp"
+            app:srcCompat="@drawable/great_job"
+            android:visibility="invisible"/>
 
         <ImageView
+            android:id="@+id/badJob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="56dp"
-            android:layout_marginBottom="77dp"
-            app:srcCompat="@drawable/bad_job" />
-
+            android:layout_marginBottom="119dp"
+            app:srcCompat="@drawable/bad_job"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </FrameLayout>
