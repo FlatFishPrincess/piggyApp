@@ -64,6 +64,31 @@
             android:layout_marginBottom="119dp"
             app:srcCompat="@drawable/bad_job"
             android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/goodBadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="177dp"
+            android:layout_marginBottom="156dp"
+            android:textAlignment="center"
+            android:textColor="@color/orange"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/reportResultTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="126dp"
+            android:textAlignment="viewStart" />
+
     </RelativeLayout>
 
 </FrameLayout>

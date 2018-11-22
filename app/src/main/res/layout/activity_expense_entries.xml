@@ -10,6 +10,7 @@
         android:id="@+id/expenseEntries"
         android:text="expense entries"
         android:textSize="15dp"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

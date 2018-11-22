@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,14 +29,14 @@ import java.util.ArrayList;
 public class ReportFragment extends Fragment {
 
     ListView reportListView;
-    TextView incomeTxt, expenseTxt;
+    TextView incomeTxt, expenseTxt, reportResultTxt, goodBadTxt;
     ImageView goodJob, badJob;
     // Currency format
     DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
 
-    double expense, savingsAmt;
+    double income, expense, savingsAmt;
 
     // this here catches the firebase and the database
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -61,6 +60,8 @@ public class ReportFragment extends Fragment {
         reportListView = view.findViewById(R.id.reportList);
         incomeTxt = view.findViewById(R.id.income);
         expenseTxt = view.findViewById(R.id.expense);
+        reportResultTxt = view.findViewById(R.id.reportResultTxt);
+        goodBadTxt = view.findViewById(R.id.goodBadTxt);
         goodJob = view.findViewById(R.id.goodJob);
         badJob = view.findViewById(R.id.badJob);
 
@@ -86,8 +87,10 @@ public class ReportFragment extends Fragment {
                 */
                 if(dataSnapshot.getValue() != null) {
                     totalIncome = dataSnapshot.getValue().toString();
+                    income = Double.parseDouble(totalIncome);
                 }else{
                     totalIncome = "0.0";
+                    income = Double.parseDouble(totalIncome);
                 }
 //                incomeTxt.setText(CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
                 list.add("Income" + "       " + CURRENCY_FORMAT.format(Double.parseDouble(totalIncome)));
@@ -108,6 +111,7 @@ public class ReportFragment extends Fragment {
         expenseListRef.keepSynced(true);
 
         expense = 0;
+        savingsAmt = 0;
         expenseListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,44 +123,62 @@ public class ReportFragment extends Fragment {
                     // adding the value inside the date field of the Expense class
                     expenseReport.value = ds.child("value").getValue(Double.class);
                     // adding the expense inside the ArrayList
-                    list.add(expenseReport.getName() + "      "  + CURRENCY_FORMAT.format(expenseReport.getValue()));
+                    list.add(expenseReport.getName() + "                "  + CURRENCY_FORMAT.format(expenseReport.getValue()));
                     expense = expense + ds.child("value").getValue(Double.class);
                 }
                 list.add("");
-                list.add("Total Expense                        " + CURRENCY_FORMAT.format(expense));
+                list.add("Total Expense                   " + CURRENCY_FORMAT.format(expense));
                 list.add("");
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() == null){
-                    list.add("Savings     " + CURRENCY_FORMAT.format(0));
-                }else {
-                    savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
-                    list.add("Savings     " + CURRENCY_FORMAT.format(savingsAmt));
-                }
+//                Toast.makeText(getContext(), savingsAmt + " " , Toast.LENGTH_LONG).show();
+                savingsAmt = income - expense;
+                list.add("Savings                           " + CURRENCY_FORMAT.format(savingsAmt));
                 if(savingsAmt > 0){
-                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
                     goodJob.setVisibility(View.VISIBLE);
+                    goodBadTxt.setText("GOOD JOB!");
+                    reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
                 } else {
-                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+                    goodBadTxt.setText("BAD JOB!");
+                    reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(savingsAmt));
                     badJob.setVisibility(View.VISIBLE);
                 }
                 reportListView.setAdapter(adapter);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-        
+
+//        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if(dataSnapshot.getValue() == null){
+//                    list.add("Savings                              " + CURRENCY_FORMAT.format(0));
+//                }else {
+//                    savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
+//                    list.add("Savings                              " + CURRENCY_FORMAT.format(savingsAmt));
+//                }
+//                if(savingsAmt > 0){
+////                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+//                    goodJob.setVisibility(View.VISIBLE);
+//                    goodBadTxt.setText("GOOD JOB!");
+//                    reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
+//                } else {
+////                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+//                    goodBadTxt.setText("BAD JOB!");
+//                    reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(savingsAmt));
+//                    badJob.setVisibility(View.VISIBLE);
+//                }
+//                reportListView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         return view;
     }
 
