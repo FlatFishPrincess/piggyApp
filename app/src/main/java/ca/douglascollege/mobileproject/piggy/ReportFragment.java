@@ -106,6 +106,7 @@ public class ReportFragment extends Fragment {
         adapter = new ArrayAdapter<String>(view.getContext(), R.layout.activity_expense_entries, R.id.expenseEntries, list);
         DatabaseReference expenseListRef = currentUserDB.child("expenseList").child("expense");
         expenseListRef.keepSynced(true);
+
         expense = 0;
         expenseListRef.addValueEventListener(new ValueEventListener() {
             @Override
