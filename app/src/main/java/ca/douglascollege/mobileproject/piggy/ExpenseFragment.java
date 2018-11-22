@@ -177,6 +177,9 @@ public class ExpenseFragment extends Fragment {
                 //savings
                 Double savingsSoFar = GetSavingsSoFar(inc, baseDailyAllowance, day, daysInMonth, expenses);
                 currentUserDB.child("savingsSoFar").setValue(savingsSoFar);
+
+                Double totExpenses = GetTotalExpenses(expenses);
+                currentUserDB.child("resultSoFar").setValue(inc-totExpenses);
             }
 
             @Override
@@ -364,6 +367,16 @@ public class ExpenseFragment extends Fragment {
 
         }
 
+
+        return output;
+    }
+
+    public Double GetTotalExpenses(ArrayList<Expense> input){
+        Double output = 0.0;
+
+        for(Expense exp: input){
+                    output = output + exp.value;
+        }
 
         return output;
     }

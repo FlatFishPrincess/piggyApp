@@ -73,14 +73,23 @@ public class SavingsActivity extends AppCompatActivity {
             }
         });
 
-        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
+        currentUserDB.child("resultSoFar").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if(dataSnapshot.getValue() == null){
                     savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(0) + " so far");
                 }else {
-                    savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(dataSnapshot.getValue()) + " so far");
-                    saved = Double.parseDouble(dataSnapshot.getValue().toString());
+                    if (Double.parseDouble(dataSnapshot.getValue().toString()) < 0){
+                        savTxt.setText("You haven't saved anything so far");
+                        saved = Double.parseDouble(dataSnapshot.getValue().toString());
+                    }
+                    else{
+                        savTxt.setText("You have saved: " + CURRENCY_FORMAT.format(dataSnapshot.getValue()) + " so far");
+                        saved = Double.parseDouble(dataSnapshot.getValue().toString());
+                    }
+
+
                 }
             }
 

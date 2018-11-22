@@ -35,7 +35,7 @@ public class ReportFragment extends Fragment {
     DecimalFormat CURRENCY_FORMAT = new DecimalFormat("$ #,###.00");
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
-
+    double totFinal;
     double income, expense, savingsAmt, overSpent;
     boolean isOverSpent;
     // this here catches the firebase and the database
@@ -125,6 +125,7 @@ public class ReportFragment extends Fragment {
                     // adding the expense inside the ArrayList
                     list.add(expenseReport.getName() + "                "  + CURRENCY_FORMAT.format(expenseReport.getValue()));
                     expense = expense + ds.child("value").getValue(Double.class);
+
                 }
                 list.add("");
                 list.add("Total Expense                                       " + CURRENCY_FORMAT.format(expense));
@@ -143,31 +144,52 @@ public class ReportFragment extends Fragment {
                 if(dataSnapshot.getValue() == null){
 
                 }else {
+
                     overSpent = Double.parseDouble(dataSnapshot.getValue().toString());
 //                    Toast.makeText(getContext(), "over" + overSpent, Toast.LENGTH_LONG).show();
                     currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.getValue() == null){
-                                list.add("Savings                                                  " + CURRENCY_FORMAT.format(0));
-                            }else {
+                            if(dataSnapshot.getValue() != null){
                                 savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
-                                list.add("Savings                                                  " + CURRENCY_FORMAT.format(savingsAmt));
+                                //list.add("Savings                                                  " + CURRENCY_FORMAT.format(savingsAmt));
                             }
-                            if(savingsAmt > 0){
+
+
+
+
+                            currentUserDB.child("resultSoFar").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.getValue() != null) {
+                                        Double totSavings = Double.parseDouble(dataSnapshot.getValue().toString());
+
+                                        if(totSavings > 0){
 //                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-                                goodJob.setVisibility(View.VISIBLE);
-                                list.add("Overspent Expense (daily basis)         " + CURRENCY_FORMAT.format(overSpent));
-                                goodBadTxt.setText("GOOD JOB!");
-                                reportResultTxt.setText("You have saved" + CURRENCY_FORMAT.format(savingsAmt));
-                            } else {
+                                            goodJob.setVisibility(View.VISIBLE);
+                                            list.add("Savings                                                  " + CURRENCY_FORMAT.format(totSavings));
+                                            //list.add("Savings         " + CURRENCY_FORMAT.format(totFinal));
+                                            goodBadTxt.setText("GOOD JOB!");
+                                            reportResultTxt.setText("You have saved" + CURRENCY_FORMAT.format(totSavings));
+                                        } else {
 //                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-                                goodBadTxt.setText("BAD JOB!");
-                                reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(overSpent));
-                                list.add("Overspent Expense (daily basis)         " + CURRENCY_FORMAT.format(overSpent));
-                                badJob.setVisibility(View.VISIBLE);
-                            }
-                            reportListView.setAdapter(adapter);
+                                            list.add("Overspent Expense          " + CURRENCY_FORMAT.format(totSavings));
+                                            goodBadTxt.setText("BAD JOB!");
+                                            reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(totSavings));
+                                            badJob.setVisibility(View.VISIBLE);
+                                        }
+                                        reportListView.setAdapter(adapter);
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }
 
                         @Override
