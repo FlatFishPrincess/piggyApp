@@ -66,10 +66,10 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(getActivity(), ReportActivity.class));
-                GraphChartFragment graphChartFragment = new GraphChartFragment();
+                ReportFragment reportFragment = new ReportFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.dashboard_frame, graphChartFragment);
+                fragmentTransaction.replace(R.id.dashboard_frame, reportFragment);
                 fragmentTransaction.commit();
             }
         });
