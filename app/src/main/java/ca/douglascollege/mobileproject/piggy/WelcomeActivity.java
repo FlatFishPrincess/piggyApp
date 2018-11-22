@@ -77,35 +77,42 @@ public class WelcomeActivity extends AppCompatActivity {
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
 
-        Log.d("sign", email + ", " + password);
+        if (email.equals("") || password.equals("")){
+            Toast.makeText(WelcomeActivity.this, "Plese enter an email and passowrd", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Log.d("sign", email + ", " + password);
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // Sign in success, update UI with the signed-in user's information
-                        if (task.isSuccessful()) {
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            // Sign in success, update UI with the signed-in user's information
+                            if (task.isSuccessful()) {
 //                            Log.d("success_signIn", "signInWithEmail:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            // Start Dashboard Activitiy with animation.
-                            // Piggy Icon is a shared transition item.
-                            Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
-                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                    WelcomeActivity.this, piggyIcon, ViewCompat.getTransitionName(piggyIcon)
-                            );
-                            startActivity(dashboardIntent, options.toBundle());
+                                // Start Dashboard Activitiy with animation.
+                                // Piggy Icon is a shared transition item.
+                                Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
+                                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                        WelcomeActivity.this, piggyIcon, ViewCompat.getTransitionName(piggyIcon)
+                                );
+                                startActivity(dashboardIntent, options.toBundle());
 //                            startActivity(new Intent(WelcomeActivity.this, DashboardActivity.class));
 //                            Toast.makeText(WelcomeActivity.this, "Sign In successfully.",
 //                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If sign in fails, display a fail message to the user.
-                            Log.w("failure_signIn", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(WelcomeActivity.this, "Please try again or Register.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                            } else {
+                                // If sign in fails, display a fail message to the user.
+                                Log.w("failure_signIn", "signInWithEmail:failure", task.getException());
+                                Toast.makeText(WelcomeActivity.this, "Please try again or Register.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                    }
-                });
+                        }
+                    });
+        }
+
+
     }
 }
