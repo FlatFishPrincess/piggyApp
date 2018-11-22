@@ -36,8 +36,8 @@ public class ReportFragment extends Fragment {
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
 
-    double income, expense, savingsAmt;
-
+    double income, expense, savingsAmt, overSpent;
+    boolean isOverSpent;
     // this here catches the firebase and the database
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -127,23 +127,8 @@ public class ReportFragment extends Fragment {
                     expense = expense + ds.child("value").getValue(Double.class);
                 }
                 list.add("");
-                list.add("Total Expense                   " + CURRENCY_FORMAT.format(expense));
+                list.add("Total Expense                                       " + CURRENCY_FORMAT.format(expense));
                 list.add("");
-//                Toast.makeText(getContext(), savingsAmt + " " , Toast.LENGTH_LONG).show();
-                savingsAmt = income - expense;
-                list.add("Savings                           " + CURRENCY_FORMAT.format(savingsAmt));
-                if(savingsAmt > 0){
-//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-                    goodJob.setVisibility(View.VISIBLE);
-                    goodBadTxt.setText("GOOD JOB!");
-                    reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
-                } else {
-//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-                    goodBadTxt.setText("BAD JOB!");
-                    reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(savingsAmt));
-                    badJob.setVisibility(View.VISIBLE);
-                }
-                reportListView.setAdapter(adapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -151,35 +136,55 @@ public class ReportFragment extends Fragment {
             }
         });
 
-//        currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.getValue() == null){
-//                    list.add("Savings                              " + CURRENCY_FORMAT.format(0));
-//                }else {
-//                    savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
-//                    list.add("Savings                              " + CURRENCY_FORMAT.format(savingsAmt));
-//                }
-//                if(savingsAmt > 0){
-////                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-//                    goodJob.setVisibility(View.VISIBLE);
-//                    goodBadTxt.setText("GOOD JOB!");
-//                    reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
-//                } else {
-////                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
-//                    goodBadTxt.setText("BAD JOB!");
-//                    reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(savingsAmt));
-//                    badJob.setVisibility(View.VISIBLE);
-//                }
-//                reportListView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        // check if user has overExpense, if not display good job
+        currentUserDB.child("overExpense").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+
+                }else {
+                    overSpent = Double.parseDouble(dataSnapshot.getValue().toString());
+//                    Toast.makeText(getContext(), "over" + overSpent, Toast.LENGTH_LONG).show();
+                    currentUserDB.child("savingsSoFar").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.getValue() == null){
+                                list.add("Savings                                                  " + CURRENCY_FORMAT.format(0));
+                            }else {
+                                savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
+                                list.add("Savings                                                  " + CURRENCY_FORMAT.format(savingsAmt));
+                            }
+                            if(overSpent < 0){
+//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+                                goodJob.setVisibility(View.VISIBLE);
+                                goodBadTxt.setText("GOOD JOB!");
+                                reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
+                            } else {
+//                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
+                                goodBadTxt.setText("BAD JOB!");
+                                reportResultTxt.setText("You have overspent " + CURRENCY_FORMAT.format(overSpent));
+                                list.add("Overspent Expense (daily basis)         " + CURRENCY_FORMAT.format(overSpent));
+                                badJob.setVisibility(View.VISIBLE);
+                            }
+                            reportListView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         return view;
     }
+
 
 }

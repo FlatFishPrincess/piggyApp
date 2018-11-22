@@ -10,18 +10,19 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="45dp">
 
+
         <TextView
             android:id="@+id/txtResult2"
-            android:layout_width="wrap_content"
+            android:layout_width="362dp"
             android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="153dp"
-            android:layout_marginEnd="66dp"
-            android:layout_marginBottom="197dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="154dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="239dp"
             android:background="@drawable/box_custom"
             android:gravity="bottom|center"
             android:paddingBottom="20dp"
@@ -51,14 +52,12 @@
 
         <TextView
             android:id="@+id/txtResult"
-            android:layout_width="120dp"
-            android:layout_height="44dp"
-            android:layout_alignParentStart="true"
+            android:layout_width="300dp"
+            android:layout_height="43dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="134dp"
-            android:layout_marginTop="225dp"
-            android:layout_marginEnd="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="216dp"
+            android:textAlignment="center"
             android:textSize="24sp" />
 
     </RelativeLayout>

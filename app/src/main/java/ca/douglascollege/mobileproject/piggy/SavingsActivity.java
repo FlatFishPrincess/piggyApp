@@ -62,10 +62,6 @@ public class SavingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings);
 
-//        addBtn = findViewById(R.id.btnAdd);
-//        eventTxt = findViewById(R.id.txtEvent);
-//        savingAmtTxt = findViewById(R.id.txtSavingAmt);
-
         savTxt = findViewById(R.id.savingsTxt);
         saved = 0;
 
@@ -162,7 +158,7 @@ public class SavingsActivity extends AppCompatActivity {
                                if(event.equals(null) || svAmount.equals(null)){
                                    Toast.makeText(SavingsActivity.this, "Please enter name and amount", Toast.LENGTH_LONG).show();
                                } else {
-                                    Toast.makeText(SavingsActivity.this, event + " "+ savingAmt, Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(SavingsActivity.this, event + " "+ savingAmt, Toast.LENGTH_LONG).show();
                                    insertItem(0, event, savingAmt, key);
                                }
                                position = position + 1;

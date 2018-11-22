@@ -17,12 +17,14 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="99dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="110dp"
             android:gravity="center"
             android:text="Monthly Report Chart"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
