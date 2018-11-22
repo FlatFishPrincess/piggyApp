@@ -154,11 +154,12 @@ public class ReportFragment extends Fragment {
                                 savingsAmt = Double.parseDouble(dataSnapshot.getValue().toString());
                                 list.add("Savings                                                  " + CURRENCY_FORMAT.format(savingsAmt));
                             }
-                            if(overSpent < 0){
+                            if(savingsAmt > 0){
 //                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
                                 goodJob.setVisibility(View.VISIBLE);
+                                list.add("Overspent Expense (daily basis)         " + CURRENCY_FORMAT.format(overSpent));
                                 goodBadTxt.setText("GOOD JOB!");
-                                reportResultTxt.setText("You have saved " + CURRENCY_FORMAT.format(savingsAmt));
+                                reportResultTxt.setText("You have saved" + CURRENCY_FORMAT.format(savingsAmt));
                             } else {
 //                    Toast.makeText(getContext(), " " + savingsAmt, Toast.LENGTH_SHORT).show();
                                 goodBadTxt.setText("BAD JOB!");

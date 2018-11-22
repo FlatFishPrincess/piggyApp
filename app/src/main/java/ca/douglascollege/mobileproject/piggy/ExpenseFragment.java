@@ -274,9 +274,9 @@ public class ExpenseFragment extends Fragment {
         Double output = 0.0;
 
         // get(1) => Calendar.YEAR
-        // TODO: get(1) => Calendar.YEAR
+
         String todayS = "" + Calendar.getInstance().get(1);//today's year
-        // TODO: get(2) + 1 => Calendar.MONTH + 1
+
         int mon = Calendar.getInstance().get(2) + 1; //today's month get(2)+1; //before
         if(mon < 10){
             todayS = todayS + "0" + mon;
