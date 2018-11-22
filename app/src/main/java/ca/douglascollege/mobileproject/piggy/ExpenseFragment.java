@@ -329,7 +329,7 @@ public class ExpenseFragment extends Fragment {
     private Double GetTodayAllowance(Double income, Double baseDailyAllowance, int today, int numberOfDays, Double overExpended){
         Double output = 0.0;
 
-        output = (income - (((today - 1)*baseDailyAllowance) + overExpended))/(numberOfDays-today+1);
+        output = (income - (((today - 1)*baseDailyAllowance) + overExpended))/(numberOfDays-today);
 
         return output;
     }
@@ -341,14 +341,14 @@ public class ExpenseFragment extends Fragment {
         ArrayList<Expense> listOfExpenses = expenses;
         Double currentAllowance = baseDailyAllowance;
 
-        for(int currentDay = 0; currentDay < today; currentDay++){
+        for(int currentDay = 0; currentDay < (today-1); currentDay++){
             if(listOfExpenses.size() > expensesCount) {
                 Expense exp = listOfExpenses.get(expensesCount);
 
                 if (Integer.parseInt(exp.date.split("/")[1]) == (currentDay+1)) {
                     if (exp.value > currentAllowance) {
                         overExp = overExp + (exp.value - currentAllowance);
-                        currentAllowance = GetTodayAllowance(incomeValue, baseDailyAllowance, currentDay, numberOfDays, overExp);
+                        currentAllowance = GetTodayAllowance(incomeValue, baseDailyAllowance, currentDay+1, numberOfDays, overExp);
                     } else {
                         output = output + (currentAllowance - exp.value);
                     }
